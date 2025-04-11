@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: angular-deployment
+  name: angular-app
 spec:
   replicas: 1
   selector:
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: angular-container
-        image: mon-app-angular:1.0
+        image: hadilk/angular-project:17
         ports:
         - containerPort: 80
