@@ -1,0 +1,71 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Liste des Employés</h2>
+  
+    <!-- Message si la liste est vide -->
+    <div *ngIf="employes.length === 0" class="alert alert-warning text-center">
+      Aucun employé trouvé.
+    </div>
+    <button class="btn btn-primary mb-3" (click)="openAddModal()">Ajouter un employé</button>
+
+    <!-- Champ de recherche -->
+    <div class="search-bar">
+      <div class="input-group">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Rechercher par nom"
+          class="form-control search-input"
+        />
+        <span class="input-group-text">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+    
+    <!-- Tableau des employés -->
+    <div *ngIf="employes.length > 0" class="table-responsive">
+      <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+          <tr>
+            
+            <th scope="col">Nom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Département</th>
+            <th scope="col" class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+          *ngFor="let employe of filteredEmployees | paginate: { itemsPerPage: 4, currentPage: p }"
+        >
+          
+             <td>{{ employe.name }}</td>
+            <td>{{ employe.email }}</td>
+            <td>{{ employe.phone }}</td>
+            <td>{{ employe.departement }}</td>
+     
+            <td class="text-center">
+              <button class="btn btn-primary btn-sm me-2" (click)="openEditModal(employe)" >
+                <i class="fas fa-edit"></i> Modifier
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="deleteEmployee(employe.id)">
+                <i class="fas fa-trash"></i> Supprimer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <pagination-controls 
+      (pageChange)="p = $event"
+      previousLabel="&#9664;"
+      nextLabel="&#9654;"
+      firstLabel="&#171;"
+      lastLabel="&#187;"
+      itemsPerPageLabel="Éléments par page"
+      totalItemsLabel="Total des éléments"
+      currentPageLabel="Page actuelle"
+      ></pagination-controls> 
+    </div>
+  </div>

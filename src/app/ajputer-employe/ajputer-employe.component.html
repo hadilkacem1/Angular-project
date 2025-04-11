@@ -1,0 +1,91 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Ajouter un Employé</h2>
+
+  <!-- Formulaire réactif -->
+  <form [formGroup]="employeForm" (ngSubmit)="ajouterEmploye()" class="needs-validation" novalidate>
+    <!-- Champ Nom -->
+    <div class="mb-4">
+      <label for="name" class="form-label">
+        <i class="fas fa-user"></i> Nom :
+      </label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        class="form-control"
+        placeholder="Entrez le nom"
+        required
+      />
+      <div *ngIf="f['name'].touched && f['name'].invalid" class="text-danger">
+        <small *ngIf="f['name'].errors?.['required']">Le nom est requis.</small>
+        <small *ngIf="f['name'].errors?.['minlength']">Minimum 3 caractères.</small>
+      </div>
+    </div>
+
+    <!-- Champ Email -->
+    <div class="mb-4">
+      <label for="email" class="form-label">
+        <i class="fas fa-envelope"></i> Email :
+      </label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        placeholder="Entrez l'email"
+        required
+      />
+      <div *ngIf="f['email'].touched && f['email'].invalid" class="text-danger">
+        <small *ngIf="f['email'].errors?.['required']">L'email est requis.</small>
+        <small *ngIf="f['email'].errors?.['email']">Format d'email invalide.</small>
+      </div>
+    </div>
+
+    <!-- Champ Téléphone -->
+    <div class="mb-4">
+      <label for="phone" class="form-label">
+        <i class="fas fa-phone"></i> Téléphone :
+      </label>
+      <input
+        type="text"
+        id="phone"
+        formControlName="phone"
+        class="form-control"
+        placeholder="Entrez le numéro de téléphone"
+        required
+      />
+      <div *ngIf="f['phone'].touched && f['phone'].invalid" class="text-danger">
+        <small *ngIf="f['phone'].errors?.['required']">Le téléphone est requis.</small>
+        <small *ngIf="f['phone'].errors?.['pattern']">Format invalide (8-12 chiffres).</small>
+      </div>
+    </div>
+
+    <!-- Champ Département -->
+    <div class="mb-4">
+      <label for="departement" class="form-label">
+        <i class="fas fa-building"></i> Département :
+      </label>
+      <input
+        type="text"
+        id="departement"
+        formControlName="departement"
+        class="form-control"
+        placeholder="Entrez le département"
+        required
+      />
+      <div *ngIf="f['departement'].touched && f['departement'].invalid" class="text-danger">
+        <small *ngIf="f['departement'].errors?.['required']">Le département est requis.</small>
+      </div>
+    </div>
+
+    <!-- Boutons Ajouter et Annuler -->
+    <div class="d-flex justify-content-center gap-3">
+      <button type="submit" class="btn btn-primary btn-lg px-4 py-2 shadow-sm hover-shadow-lg">
+        <i class="fas fa-plus-circle"></i> Ajouter
+      </button>
+      <button type="button" class="btn btn-secondary btn-lg px-4 py-2 shadow-sm hover-shadow-lg" (click)="onCancel()">
+        <i class="fas fa-times-circle"></i> Annuler
+      </button>
+    </div>
+  </form>
+</div>

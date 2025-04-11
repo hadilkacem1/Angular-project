@@ -1,0 +1,47 @@
+<h1 class="form-title">Ajouter un Contact</h1>
+
+<form [formGroup]="contactForm" (ngSubmit)="ajouterContact()" class="contact-form">
+  <!-- Champ Nom -->
+  <div class="form-group">
+    <label for="nom" class="form-label">Nom</label>
+    <input type="text" id="nom" formControlName="nom" required class="form-input" />
+    <div *ngIf="f['nom'].touched && f['nom'].invalid" class="error-message">
+      <small *ngIf="f['nom'].hasError('required')">Le nom est requis.</small>
+      <small *ngIf="f['nom'].hasError('minlength')">Le nom doit comporter au moins 3 caractères.</small>
+    </div>
+  </div>
+
+  <!-- Champ Email -->
+  <div class="form-group">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" id="email" formControlName="email" required class="form-input" />
+    <div *ngIf="f['email'].touched && f['email'].invalid" class="error-message">
+      <small *ngIf="f['email'].hasError('required')">L'email est requis.</small>
+      <small *ngIf="f['email'].hasError('email')">Veuillez entrer un email valide.</small>
+    </div>
+  </div>
+
+  <!-- Champ Sujet -->
+  <div class="form-group">
+    <label for="sujet" class="form-label">Sujet</label>
+    <input type="text" id="sujet" formControlName="sujet" required class="form-input" />
+    <div *ngIf="f['sujet'].touched && f['sujet'].invalid" class="error-message">
+      <small *ngIf="f['sujet'].hasError('required')">Le sujet est requis.</small>
+    </div>
+  </div>
+
+  <!-- Champ Message -->
+  <div class="form-group">
+    <label for="msg" class="form-label">Message</label>
+    <textarea id="msg" formControlName="msg" required class="form-textarea"></textarea>
+    <div *ngIf="f['msg'].touched && f['msg'].invalid" class="error-message">
+      <small *ngIf="f['msg'].hasError('required')">Le message est requis.</small>
+    </div>
+  </div>
+
+  <!-- Boutons -->
+  <div class="buttons">
+    <button type="button" class="btn-cancel" (click)="onCancel()">Annuler</button>
+    <button type="submit" class="btn-submit" [disabled]="contactForm.invalid">Ajouter</button>
+  </div>
+</form>

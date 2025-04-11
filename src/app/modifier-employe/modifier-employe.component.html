@@ -1,0 +1,79 @@
+<h2 mat-dialog-title>Modifier l'employé</h2>
+<mat-dialog-content>
+  <!-- Formulaire piloté par le template -->
+  <form #employeForm="ngForm" (ngSubmit)="onSave()">
+    <!-- Champ Nom -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Nom</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="employe.name"
+        name="name"
+        required
+      />
+      <div *ngIf="employeForm.controls['name']?.invalid && employeForm.controls['name']?.touched" class="text-danger">
+        <small>Le nom est requis.</small>
+      </div>
+    </div>
+
+    <!-- Champ Email -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        [(ngModel)]="employe.email"
+        name="email"
+        required
+        email
+      />
+      <div *ngIf="employeForm.controls['email']?.invalid && employeForm.controls['email']?.touched" class="text-danger">
+        <small *ngIf="employeForm.controls['email']?.errors?.['required']">L'email est requis.</small>
+        <small *ngIf="employeForm.controls['email']?.errors?.['email']">Format d'email invalide.</small>
+      </div>
+    </div>
+
+    <!-- Champ Téléphone -->
+    <div class="mb-3">
+      <label for="phone" class="form-label">Téléphone</label>
+      <input
+        type="text"
+        class="form-control"
+        id="phone"
+        [(ngModel)]="employe.phone"
+        name="phone"
+        required
+        pattern="^[0-9]{8,12}$"
+      />
+      <div *ngIf="employeForm.controls['phone']?.invalid && employeForm.controls['phone']?.touched" class="text-danger">
+        <small *ngIf="employeForm.controls['phone']?.errors?.['required']">Le téléphone est requis.</small>
+        <small *ngIf="employeForm.controls['phone']?.errors?.['pattern']">Format invalide (8-12 chiffres).</small>
+      </div>
+    </div>
+
+    <!-- Champ Département -->
+    <div class="mb-3">
+      <label for="departement" class="form-label">Département</label>
+      <input
+        type="text"
+        class="form-control"
+        id="departement"
+        [(ngModel)]="employe.departement"
+        name="departement"
+        required
+      />
+      <div *ngIf="employeForm.controls['departement']?.invalid && employeForm.controls['departement']?.touched" class="text-danger">
+        <small>Le département est requis.</small>
+      </div>
+    </div>
+
+    <!-- Boutons Annuler et Enregistrer -->
+    <div class="text-end">
+      <button type="button" class="btn btn-secondary me-2" (click)="onCancel()">Annuler</button>
+      <button type="submit" class="btn btn-primary" [disabled]="employeForm.invalid">Enregistrer</button>
+    </div>
+  </form>
+</mat-dialog-content>
